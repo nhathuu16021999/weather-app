@@ -7,14 +7,23 @@ const api = {
 
 function App() {
   const [query, setQuery] = useState('');
+  const [message, setMessage] = useState('');
   const [weather, setWeather] = useState({});
 
   const search = (evt) => {
     if (evt.key === 'Enter') {
       fetch(`${api.base}weather?q=${query}&units=metric&APPID=${api.key}`)
-        .then((res) => res.json())
+        .then((res) => {
+          if (!res.ok) {
+            setMessage(`Not Found Country ${query}!`);
+          }
+          return res.json();
+        })
         .then((result) => {
           setWeather(result);
+        })
+        .catch((error) => {
+          console.error('Error', error);
         });
     }
   };
@@ -87,7 +96,7 @@ function App() {
             </div>
           </>
         ) : (
-          ''
+          <div className='message-error'>{message}</div>
         )}
       </main>
     </div>
