@@ -29,12 +29,42 @@ main {
   padding: 25px;
 }
 
-.message-error {
-  color: #fff;
-  font-size: 40px;
-  font-weight: 500;
+.error-popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform: scale(1);
+}
+
+.error-popup.active-popup {
+  transform: scale(0);
+}
+
+.error-message {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
   text-align: center;
-  text-shadow: 3px 3px rgba(50, 50, 70, 0.5);
+}
+
+.error-message h2 {
+  margin-top: 0;
+}
+
+.close-button {
+  background-color: #333;
+  color: #fff;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 20px;
 }
 
 .search-box {

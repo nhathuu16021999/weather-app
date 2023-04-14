@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 const api = {
   key: '2f1d565acc496b45465327ba81a3b293',
@@ -61,6 +61,17 @@ function App() {
     return `${day} ${date}, ${month} ${year}`;
   };
 
+  useEffect(() => {
+    if (message !== '') {
+      const errorPopup = document.getElementsByClassName('error-popup');
+      const btnClose = document.getElementsByClassName('close-button');
+
+      btnClose[0].addEventListener('click', () => {
+        errorPopup[0].classList.add('active-popup');
+      });
+    }
+  }, [message]);
+
   return (
     <div
       className={
@@ -95,8 +106,16 @@ function App() {
               <div className='weather'>{weather.weather[0].main}</div>
             </div>
           </>
+        ) : message ? (
+          <div className='error-popup'>
+            <div className='error-message'>
+              <h2>Error!</h2>
+              <p>{message}</p>
+              <button className='close-button'>Close</button>
+            </div>
+          </div>
         ) : (
-          <div className='message-error'>{message}</div>
+          ''
         )}
       </main>
     </div>
